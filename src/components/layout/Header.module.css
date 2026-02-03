@@ -1,26 +1,28 @@
 .header {
   display: flex;
   align-items: center;
-  background: #1a5276;
+  background: linear-gradient(135deg, #10b981, #059669);
   color: #fff;
   padding: 6px 8px;
   height: 36px;
   position: relative;
+  box-shadow: 0 1px 4px rgba(5, 150, 105, 0.3);
 }
 
 .backButton {
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
   font-size: 12px;
   padding: 2px 8px;
   border-radius: 4px;
   cursor: pointer;
   flex-shrink: 0;
+  backdrop-filter: blur(4px);
 }
 
 .backButton:active {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .title {
@@ -29,4 +31,5 @@
   font-size: 14px;
   margin: 0;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }

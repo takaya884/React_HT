@@ -18,6 +18,13 @@ const MENU_ITEMS: MenuItem[] = [
     description: 'バーコード読取・蓄積',
   },
   {
+    id: 'data-list',
+    label: 'データ確認',
+    path: '/data-list',
+    icon: '📋',
+    description: '蓄積データの確認・削除',
+  },
+  {
     id: 'send',
     label: 'サーバー送信',
     path: '/send',

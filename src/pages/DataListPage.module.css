@@ -1,0 +1,145 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  position: sticky;
+  top: 0;
+  background: #f0faf4;
+  z-index: 1;
+  padding-bottom: 2px;
+}
+
+.clearButton {
+  font-size: 11px;
+  padding: 3px 10px;
+  background: #fff;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  color: #dc2626;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.clearButton:active {
+  background: #fef2f2;
+}
+
+.confirmRow {
+  display: flex;
+  gap: 4px;
+}
+
+.confirmYes {
+  font-size: 11px;
+  padding: 3px 10px;
+  background: #dc2626;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.confirmYes:active {
+  background: #b91c1c;
+}
+
+.confirmNo {
+  font-size: 11px;
+  padding: 3px 10px;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 8px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #d1fae5;
+  border-radius: 8px;
+  padding: 5px 6px;
+  gap: 4px;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.itemIndex {
+  font-size: 10px;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.itemDetail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.itemValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemTime {
+  font-size: 9px;
+  color: #9ca3af;
+}
+
+.deleteButton {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid #fca5a5;
+  background: #fff;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.deleteButton:active {
+  background: #fef2f2;
+}

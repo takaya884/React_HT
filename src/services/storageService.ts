@@ -22,6 +22,15 @@ export function getScannedDataCount(): number {
   return getScannedData().length;
 }
 
+/** 指定IDのデータを削除 */
+export function removeScannedData(id: string): void {
+  const data = getScannedData();
+  const target = data.find((d) => d.id === id);
+  const filtered = data.filter((d) => d.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+  writeLog('INFO', 'OPERATION', `データ削除: ${target?.value ?? id}`);
+}
+
 /** 送信済みデータをクリア */
 export function clearScannedData(): void {
   localStorage.removeItem(STORAGE_KEY);

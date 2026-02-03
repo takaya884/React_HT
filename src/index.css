@@ -14,8 +14,8 @@ html, body {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
-  background: #f5f6fa;
-  color: #2c3e50;
+  background: #f0faf4;
+  color: #1e293b;
 }
 
 #root {
@@ -35,7 +35,11 @@ button, input, select, textarea {
   width: 4px;
 }
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 ::-webkit-scrollbar-thumb {
-  background: #bdc3c7;
+  background: rgba(16, 185, 129, 0.35);
   border-radius: 2px;
 }

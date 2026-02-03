@@ -2,12 +2,18 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 6px;
+  position: sticky;
+  top: 0;
+  background: #f0faf4;
+  z-index: 1;
+  padding-bottom: 2px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+  padding-bottom: 8px;
 }
 
 .menuButton {
@@ -16,15 +22,18 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border: 1px solid #d5dbdb;
-  border-radius: 8px;
+  border: 1px solid #d1fae5;
+  border-radius: 10px;
   padding: 10px 4px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
 .menuButton:active {
-  background: #eaf2f8;
+  background: #ecfdf5;
+  border-color: #10b981;
+  transform: scale(0.97);
 }
 
 .icon {
@@ -35,11 +44,11 @@
 .label {
   font-size: 13px;
   font-weight: 600;
-  color: #1a5276;
+  color: #059669;
 }
 
 .description {
   font-size: 10px;
-  color: #7f8c8d;
+  color: #9ca3af;
   margin-top: 2px;
 }
