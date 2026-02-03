@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, #10b981, #059669);
+  background: -webkit-linear-gradient(135deg, #10b981, #059669);
   color: #fff;
-  padding: 6px 8px;
-  height: 36px;
+  padding: 4px 8px;
+  height: 28px;
   position: relative;
   box-shadow: 0 1px 4px rgba(5, 150, 105, 0.3);
 }
@@ -13,12 +14,11 @@
   background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
-  font-size: 12px;
-  padding: 2px 8px;
+  font-size: 11px;
+  padding: 1px 6px;
   border-radius: 4px;
   cursor: pointer;
   flex-shrink: 0;
-  backdrop-filter: blur(4px);
 }
 
 .backButton:active {
@@ -28,8 +28,12 @@
 .title {
   flex: 1;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+
+.rightSlot {
+  flex-shrink: 0;
 }

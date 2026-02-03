@@ -5,12 +5,14 @@ import styles from './AppLayout.module.css';
 interface AppLayoutProps {
   title: string;
   children: ReactNode;
+  /** ヘッダー右側に表示するスロット */
+  headerRight?: ReactNode;
 }
 
-export function AppLayout({ title, children }: AppLayoutProps) {
+export function AppLayout({ title, children, headerRight }: AppLayoutProps) {
   return (
     <div className={styles.container}>
-      <Header title={title} />
+      <Header title={title} rightSlot={headerRight} />
       <main className={styles.main}>{children}</main>
     </div>
   );

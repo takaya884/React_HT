@@ -24,7 +24,7 @@ export async function checkNetwork(): Promise<boolean> {
     clearTimeout(timeout);
     writeLog('INFO', 'NETWORK', 'ネットワーク接続確認OK');
     return true;
-  } catch {
+  } catch (_e) {
     writeLog('WARN', 'NETWORK', 'サーバーへの接続に失敗しました');
     return false;
   }
