@@ -1,30 +1,42 @@
 .statusRow {
+  display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .grid {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  padding-bottom: 6px;
+  -ms-grid-columns: 1fr 1fr;
+  gap: 4px;
+  padding-bottom: 4px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 90px);
 }
 
 .menuButton {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: #fff;
-  border: 1px solid #d1fae5;
-  border-radius: 8px;
-  padding: 6px 4px;
+  border: 2px solid #d1fae5;
+  border-radius: 6px;
+  padding: 6px 2px;
   cursor: pointer;
   -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease;
-  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.1);
   min-height: 0;
+  outline: none;
 }
 
 .menuButton:active {
@@ -34,21 +46,67 @@
   transform: scale(0.97);
 }
 
+.menuButton:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  -webkit-box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+/* 選択中のボタン */
+.menuButtonSelected {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: #ecfdf5;
+  border: 2px solid #10b981;
+  border-radius: 6px;
+  padding: 6px 2px;
+  cursor: pointer;
+  -webkit-transition: all 0.15s ease;
+  transition: all 0.15s ease;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  -webkit-box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  min-height: 0;
+  outline: none;
+}
+
+.menuButtonSelected:active {
+  -webkit-transform: scale(0.97);
+  transform: scale(0.97);
+}
+
 .icon {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 1px;
 }
 
 .label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: #059669;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .description {
-  font-size: 9px;
+  font-size: 8px;
   color: #9ca3af;
   margin-top: 1px;
+}
+
+/* 操作ヒント */
+.hint {
+  text-align: center;
+  font-size: 9px;
+  color: #9ca3af;
+  padding: 2px 0;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
 }
 
 /* 終了ボタン */
@@ -56,9 +114,9 @@
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 1px 8px;
+  padding: 1px 6px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -75,8 +133,11 @@
   width: 320px;
   height: 240px;
   background: rgba(0, 0, 0, 0.5);
+  display: -webkit-flex;
   display: flex;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
   justify-content: center;
   z-index: 100;
 }
@@ -84,7 +145,7 @@
 .confirmBox {
   background: #fff;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   width: 260px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -94,40 +155,72 @@
   font-size: 11px;
   color: #1e293b;
   line-height: 1.5;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
 }
 
 .confirmButtons {
+  display: -webkit-flex;
   display: flex;
   gap: 8px;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
 .confirmYes {
   background: #dc2626;
   color: #fff;
-  border: none;
+  border: 2px solid #dc2626;
   border-radius: 6px;
-  padding: 5px 16px;
+  padding: 5px 14px;
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
+  outline: none;
 }
 
 .confirmYes:active {
   background: #b91c1c;
 }
 
+.confirmYesFocused {
+  background: #dc2626;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 0 2px #dc2626;
+  -webkit-box-shadow: 0 0 0 2px #dc2626;
+}
+
 .confirmNo {
   background: #fff;
   color: #6b7280;
-  border: 1px solid #d1d5db;
+  border: 2px solid #d1d5db;
   border-radius: 6px;
-  padding: 5px 16px;
+  padding: 5px 14px;
   font-size: 11px;
   cursor: pointer;
+  outline: none;
 }
 
 .confirmNo:active {
   background: #f3f4f6;
+}
+
+.confirmNoFocused {
+  background: #fff;
+  color: #374151;
+  border: 2px solid #10b981;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  -webkit-box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
 }

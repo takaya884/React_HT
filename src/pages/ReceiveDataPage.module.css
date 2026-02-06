@@ -1,0 +1,149 @@
+.container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+  overflow: hidden;
+  outline: none;
+}
+
+.main {
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.content {
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #a7f3d0;
+}
+
+.iconArea {
+  margin-bottom: 12px;
+}
+
+.icon {
+  font-size: 40px;
+}
+
+.iconSpin {
+  font-size: 40px;
+  display: inline-block;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+.iconSuccess {
+  font-size: 40px;
+}
+
+.iconError {
+  font-size: 40px;
+}
+
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.message {
+  font-size: 13px;
+  color: #374151;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.progressBar {
+  width: 80%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  -webkit-transition: width 0.3s ease;
+  transition: width 0.3s ease;
+}
+
+.resultBox {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.resultItem {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #374151;
+}
+
+.resultItem:last-child {
+  border-bottom: none;
+}
+
+.actions {
+  margin-top: 8px;
+}
+
+.buttonPrimary {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.buttonDisabled {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: not-allowed;
+  background: #9ca3af;
+  color: white;
+}
+
+.hint {
+  text-align: center;
+  font-size: 9px;
+  color: #9ca3af;
+  padding: 4px 0;
+  margin-top: 4px;
+}

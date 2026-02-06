@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/layout/AppLayout';
 import { StatusBadge } from '../components/common/StatusBadge';
@@ -13,11 +13,32 @@ import styles from './MenuPage.module.css';
  */
 const MENU_ITEMS: MenuItem[] = [
   {
-    id: 'scan',
-    label: 'データ読取',
-    path: '/scan',
-    icon: '📖',
-    description: 'バーコード読取・蓄積',
+    id: 'receiving',
+    label: '入庫',
+    path: '/receiving',
+    icon: '📥',
+    description: '入庫処理',
+  },
+  {
+    id: 'shipping',
+    label: '出庫',
+    path: '/shipping',
+    icon: '📤',
+    description: '出庫処理',
+  },
+  {
+    id: 'master',
+    label: 'チェックマスタ作成',
+    path: '/master',
+    icon: '📝',
+    description: 'マスタデータ作成',
+  },
+  {
+    id: 'delivery-check',
+    label: '納品チェック',
+    path: '/delivery-check',
+    icon: '✅',
+    description: '納品確認',
   },
   {
     id: 'inventory',
@@ -27,18 +48,32 @@ const MENU_ITEMS: MenuItem[] = [
     description: 'ロケーション別棚卸',
   },
   {
+    id: 'scan',
+    label: 'データ読取',
+    path: '/scan',
+    icon: '📖',
+    description: 'バーコード読取',
+  },
+  {
     id: 'data-list',
     label: 'データ確認',
     path: '/data-list',
     icon: '📋',
-    description: '蓄積データの確認・削除',
+    description: '蓄積データ確認',
   },
   {
     id: 'send',
-    label: 'サーバー送信',
+    label: 'データ送信',
     path: '/send',
     icon: '📡',
-    description: '蓄積データを送信',
+    description: 'サーバーへ送信',
+  },
+  {
+    id: 'receive',
+    label: 'データ受信',
+    path: '/receive',
+    icon: '📥',
+    description: 'サーバーから受信',
   },
 ];
 
@@ -46,10 +81,103 @@ export function MenuPage() {
   const navigate = useNavigate();
   const dataCount = getScannedDataCount();
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const menuButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const confirmYesRef = useRef<HTMLButtonElement>(null);
+  const confirmNoRef = useRef<HTMLButtonElement>(null);
+  const [confirmFocus, setConfirmFocus] = useState<'yes' | 'no'>('no');
+
+  // キーボードナビゲーション（十字キー対応）
+  const handleKeyDown = useCallback(function(e: KeyboardEvent) {
+    if (showExitConfirm) {
+      // 確認ダイアログ表示中
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        setConfirmFocus(function(prev) { return prev === 'yes' ? 'no' : 'yes'; });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (confirmFocus === 'yes') {
+          doExit();
+        } else {
+          setShowExitConfirm(false);
+        }
+      } else if (e.key === 'Escape' || e.key === 'Backspace') {
+        e.preventDefault();
+        setShowExitConfirm(false);
+      }
+      return;
+    }
+
+    const cols = 2; // 2列グリッド
+    const totalItems = MENU_ITEMS.length;
+
+    switch (e.key) {
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedIndex(function(prev) {
+          const newIndex = prev - cols;
+          return newIndex >= 0 ? newIndex : prev;
+        });
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedIndex(function(prev) {
+          const newIndex = prev + cols;
+          return newIndex < totalItems ? newIndex : prev;
+        });
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        setSelectedIndex(function(prev) {
+          return prev > 0 ? prev - 1 : prev;
+        });
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        setSelectedIndex(function(prev) {
+          return prev < totalItems - 1 ? prev + 1 : prev;
+        });
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (MENU_ITEMS[selectedIndex]) {
+          navigate(MENU_ITEMS[selectedIndex].path);
+        }
+        break;
+      default:
+        break;
+    }
+  }, [showExitConfirm, confirmFocus, selectedIndex, navigate]);
+
+  useEffect(function() {
+    window.addEventListener('keydown', handleKeyDown);
+    return function() {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  // 選択中のボタンにフォーカス
+  useEffect(function() {
+    if (!showExitConfirm && menuButtonRefs.current[selectedIndex]) {
+      menuButtonRefs.current[selectedIndex]?.focus();
+    }
+  }, [selectedIndex, showExitConfirm]);
+
+  // 確認ダイアログのフォーカス制御
+  useEffect(function() {
+    if (showExitConfirm) {
+      if (confirmFocus === 'yes') {
+        confirmYesRef.current?.focus();
+      } else {
+        confirmNoRef.current?.focus();
+      }
+    }
+  }, [showExitConfirm, confirmFocus]);
 
   function handleExit() {
     if (dataCount > 0) {
       setShowExitConfirm(true);
+      setConfirmFocus('no');
     } else {
       doExit();
     }
@@ -58,14 +186,11 @@ export function MenuPage() {
   function doExit() {
     clearScannedData();
     writeLog('INFO', 'SYSTEM', 'システム終了');
-    // ブラウザのタブ/ウィンドウを閉じる
-    // window.close()はスクリプトで開いたウィンドウでないと動作しない場合がある
     try {
       window.close();
     } catch (_e) {
-      // 閉じられない場合はabout:blankに遷移
+      // 閉じられない場合
     }
-    // window.close()が効かなかった場合のフォールバック
     window.location.href = 'about:blank';
   }
 
@@ -91,11 +216,16 @@ export function MenuPage() {
               よろしいですか？
             </p>
             <div className={styles.confirmButtons}>
-              <button className={styles.confirmYes} onClick={doExit}>
+              <button
+                ref={confirmYesRef}
+                className={confirmFocus === 'yes' ? styles.confirmYesFocused : styles.confirmYes}
+                onClick={doExit}
+              >
                 終了する
               </button>
               <button
-                className={styles.confirmNo}
+                ref={confirmNoRef}
+                className={confirmFocus === 'no' ? styles.confirmNoFocused : styles.confirmNo}
                 onClick={function () { setShowExitConfirm(false); }}
               >
                 キャンセル
@@ -106,19 +236,25 @@ export function MenuPage() {
       )}
 
       <div className={styles.grid}>
-        {MENU_ITEMS.map(function (item) {
+        {MENU_ITEMS.map(function (item, index) {
+          var isSelected = index === selectedIndex;
           return (
             <button
               key={item.id}
-              className={styles.menuButton}
+              ref={function(el) { menuButtonRefs.current[index] = el; }}
+              className={isSelected ? styles.menuButtonSelected : styles.menuButton}
               onClick={function () { navigate(item.path); }}
+              onFocus={function() { setSelectedIndex(index); }}
             >
               <span className={styles.icon}>{item.icon}</span>
               <span className={styles.label}>{item.label}</span>
-              <span className={styles.description}>{item.description}</span>
             </button>
           );
         })}
+      </div>
+
+      <div className={styles.hint}>
+        ↑↓←→: 選択　Enter: 決定
       </div>
     </AppLayout>
   );
