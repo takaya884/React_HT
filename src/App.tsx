@@ -3,6 +3,7 @@ import { MenuPage } from './pages/MenuPage';
 import { ScanPage } from './pages/ScanPage';
 import { SendPage } from './pages/SendPage';
 import { DataListPage } from './pages/DataListPage';
+import { InventoryPage } from './pages/InventoryPage';
 
 /**
  * アプリケーションルート
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<MenuPage />} />
         <Route path="/scan" element={<ScanPage />} />
         <Route path="/data-list" element={<DataListPage />} />
+        <Route path="/inventory" element={<InventoryPage />} />
         <Route path="/send" element={<SendPage />} />
       </Routes>
     </HashRouter>

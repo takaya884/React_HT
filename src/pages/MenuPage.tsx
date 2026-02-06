@@ -20,6 +20,13 @@ const MENU_ITEMS: MenuItem[] = [
     description: 'バーコード読取・蓄積',
   },
   {
+    id: 'inventory',
+    label: '棚卸',
+    path: '/inventory',
+    icon: '📦',
+    description: 'ロケーション別棚卸',
+  },
+  {
     id: 'data-list',
     label: 'データ確認',
     path: '/data-list',
